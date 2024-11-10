@@ -24,7 +24,7 @@ public class Ejercicio1 {
 			numeros[i] = numRandom;
 		}
 
-		// Creamos un for que imprima cada elemento de la tabla numeros[]
+		// Creamos un for-each que imprima cada elemento de la tabla numeros[]
 		for (int numero : numeros) {
 			System.out.println(numero);
 		}
