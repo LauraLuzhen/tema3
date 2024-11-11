@@ -36,6 +36,9 @@ public class Ejercicio6 {
 			numerosPrimitiva[i] = numPrimitiva;
 		}
 
+		//Ordenamos la tabla ganadora
+		Arrays.sort(combinacionGanadora);
+		
 		// Comparamos las dos tablas usando .equals
 		igual = Arrays.equals(numerosPrimitiva, combinacionGanadora);
 
