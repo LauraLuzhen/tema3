@@ -16,8 +16,6 @@ public class Ejercicio2 {
 		double min = Double.MAX_VALUE;
 		// Variable que guarda la nota máxima de un alumno
 		double max = Double.MIN_NORMAL;
-		// Variable que guarda la suma de las notas
-		double suma = 0;
 		// Variable que guarda la media de un alumno
 		double media = 0;
 
@@ -55,12 +53,43 @@ public class Ejercicio2 {
 						reader.nextLine();
 					}
 				} while (error == true);
-			}	
+
+				// Guardamos la nota en la celda correspondiente
+				alumnosNotas[i][j] = nota;
+			}
 		}
 
-		for (int i=0; i<alumnosNotas.length; i++) {
-			
+		// Imprimimos la tabla con un for
+		System.out.println("\t\tAsignatura 1\tAsignatura 2\tAsignatura 3\tAsignatura 4\tAsignatura 5");
+		for (int i = 0; i < alumnosNotas.length; i++) {
+			System.out.print("Alumno " + (i + 1) + "\t");
+			for (int j = 0; j < alumnosNotas[0].length; j++) {
+
+				System.out.print(alumnosNotas[i][j] + "\t\t");
+			}
+			System.out.println();
 		}
+
+		// Creamos un for que imprima por otro lado el max, min y media de cada alumno
+		for (int i = 0; i < alumnosNotas.length; i++) {
+			System.out.println("Alumno " + (i + 1));
+			for (int j = 0; j < alumnosNotas[0].length; j++) {
+				nota = alumnosNotas[i][j];
+				if (nota > max) {
+					max = nota;
+				}
+				if (nota < min) {
+					min = nota;
+				}
+				media += alumnosNotas[i][j];
+			}
+			System.out.println("Nota máxima: " + max + "\nNota mínima: " + min + "\nMedia: " + media);
+			max = Double.MIN_VALUE;
+			min = Double.MAX_VALUE;
+			media = 0;
+			System.out.println();
+		}
+		
 		// Cerramos el Scanner
 		reader.close();
 	}
