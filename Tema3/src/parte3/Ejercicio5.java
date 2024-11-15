@@ -14,9 +14,9 @@ public class Ejercicio5 {
 		int sumFila = 0;
 		// Variable que guarda el total
 		int total = 0;
-		//Variable que guarda la suma de cada columna
+		// Variable que guarda la suma de cada columna
 		int sumColumna = 0;
-		
+
 		// Creamos una tabla de x=4 y=5
 		int tabla[][] = new int[4][5];
 
@@ -43,18 +43,17 @@ public class Ejercicio5 {
 			System.out.println();
 			sumFila = 0;
 		}
-		
-		for (int i=0; i<tabla[0].length; i++) {
-			for (int j=0; j<tabla.length; j++) {
+
+		// Creamos dos for pero que recorra de columnas a filas
+		for (int i = 0; i < tabla[0].length; i++) {
+			for (int j = 0; j < tabla.length; j++) {
 				sumColumna += tabla[j][i];
 			}
 			System.out.print(sumColumna + "\t");
-			total += sumColumna;
-			
+
 			sumColumna = 0;
 		}
-		
+
 		System.out.println(total);
-		
 	}
 }
