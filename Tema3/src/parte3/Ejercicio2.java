@@ -70,6 +70,9 @@ public class Ejercicio2 {
 			System.out.println();
 		}
 
+		System.out.println();
+		System.out.println("NOTAS DE CADA ALUMNO\n");
+		
 		// Creamos un for que imprima por otro lado el max, min y media de cada alumno
 		for (int i = 0; i < alumnosNotas.length; i++) {
 			System.out.println("Alumno " + (i + 1));
