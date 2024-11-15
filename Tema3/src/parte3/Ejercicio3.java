@@ -71,11 +71,17 @@ public class Ejercicio3 {
 			for (int j = 0; j < tabla[0].length; j++) {
 				// Calculamos e imprimimos el valor de cada celda
 				tabla[i][j] = 10*i+j;
-				System.out.print(tabla[i][j] + "\t");
+			}
+		}
+
+		// Imprimimos la tabla con fun for:each
+		for (int[] fila: tabla) {
+			for (int col: fila) {
+				System.out.print(col + "\t");
 			}
 			System.out.println();
 		}
-
+		
 		// Cerramos el Scanner
 		reader.close();
 	}
