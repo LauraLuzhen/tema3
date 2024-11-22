@@ -1,18 +1,24 @@
 package parte4;
 
+// Importamos el Scanner
+import java.util.Scanner;
+
 public class EjercicioBidimensional2 {
 
 	public static void main(String[] args) {
 
 		// Declaración de variables
-		// Variable que guarda el valor de cada elemento
-		int valor = 1;
+		// Variable que guarda la longitud del usuario
+		int longitud = 0;
 
-		// Creamos una tabla de 4 filas y 4 columnas
-		int tabla[][] = new int[4][4];
+		// Creamos una tabla
+		int tabla[][];
 		// Creamos una tabla que sea la traspuesta
-		int traspuesta[][] = new int[4][4];
+		int traspuesta[][];
 
+		// Creamos el Scanner
+		Scanner reader = new Scanner (System.in);
+		
 		// Creamos dos for para rellenar la tabla con los valores
 		for (int i = 0; i < tabla.length; i++) {
 			for (int j = 0; j < tabla[i].length; j++) {
@@ -32,7 +38,8 @@ public class EjercicioBidimensional2 {
 		// Llamamos a la función y la guardamos en la variable traspuesta
 		traspuesta = traspuesta(tabla);
 
-		// Creamos dos for para imprimir la traspuesta
+		// Creamos dos for-each para imprimir la traspuesta
+		System.out.println("\t");
 		for (int i = 0; i < tabla.length; i++) {
 			for (int j = 0; j < tabla[i].length; j++) {
 				System.out.print("\t" + traspuesta[i][j]);
