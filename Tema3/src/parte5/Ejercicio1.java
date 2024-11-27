@@ -1,9 +1,12 @@
 package parte5;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Ejercicio1 {
+	
+	static Scanner reader=new Scanner(System.in);
 
 	public static void main(String[] args) {
 		
@@ -23,7 +26,6 @@ public class Ejercicio1 {
 		// Creamos el Random
 		Random rand = new Random();
 		// Creamos el Scanner
-		Scanner reader = new Scanner (System.in);
 		
 		// Creamos dos for que recorra las filas y columnas de la tabla
 		for (int i = 0; i < tabla.length; i++) {
@@ -42,7 +44,7 @@ public class Ejercicio1 {
 				valor = reader.nextInt();
 				assert (valor > 0 && valor < 1001);
 				error = false;
-			} catch (Exception e) {
+			} catch (InputMismatchException e) {
 				// Imprimimos un mensaje de erro
 				System.err.println("Introduce un valor válido");
 				error = true;
@@ -55,6 +57,7 @@ public class Ejercicio1 {
 			}
 		} while (error == true);
 		
+		// Imprimimos y llamamos a la función presente
 		System.out.println(presente(tabla, valor));
 		
 		// Cerramos el Scanner
@@ -70,8 +73,6 @@ public class Ejercicio1 {
 		// Creamos una tabla bidimensional
 		int[] tabla = new int[2];
 		
-		// Creamos el Scanner
-		Scanner reader = new Scanner (System.in);
 		
 		for (int i=0; i<2; i++) {
 			// Creamos un do-while que salga del bucle cuando no haya errores
@@ -101,8 +102,6 @@ public class Ejercicio1 {
 			} while (error == true);
 		}
 		
-		// Cerramos el Scanner
-		reader.close();
 		
 		// Devolvemos la tabla
 		return tabla;
@@ -112,8 +111,18 @@ public class Ejercicio1 {
 		
 		// Declaración de variables
 		// Variable que indica si está o no en la tabla
-		boolean noPresente = true;
+		boolean enc = false;
 		
-		while ()
+		// Creamos un while que dentro tenga dos for-while y recorra cada elemento de la tabla y lo compare con el valor
+		while (!enc) {
+			for (int fila[]: t) {
+				for (int elemento: fila) {
+					enc = elemento == valor;
+				}
+			}
+		}
+		
+		// Devolvemos si el valor se encuentra o no en la tabla
+		return enc;
 	}
 }
