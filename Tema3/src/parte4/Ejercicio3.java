@@ -41,7 +41,7 @@ public class Ejercicio3 {
 			} finally {
 				reader.nextLine();
 			}
-		} while (error == true);
+		} while (error);
 
 		// Creamos un do-while que se sale del bucle cuando no hay errores
 		do {
@@ -62,7 +62,7 @@ public class Ejercicio3 {
 			} finally {
 				reader.nextLine();
 			}
-		} while (error == true);
+		} while (error);
 
 		// Llamamos a la función rellenaPares
 		System.out.println(Arrays.toString(rellenaPares(longitud, fin)));

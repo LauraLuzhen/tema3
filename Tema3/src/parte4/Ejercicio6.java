@@ -40,7 +40,7 @@ public class Ejercicio6 {
 			} finally {
 				reader.nextLine();
 			}
-		} while (error == true);
+		} while (error);
 
 		// Le damos la longitud del ususario a la tabla
 		tabla = new int[longitud];
@@ -73,7 +73,7 @@ public class Ejercicio6 {
 			} finally {
 				reader.nextLine();
 			}
-		} while (error == true);
+		} while (error);
 
 		// Llamamos e imprimimos la función suma
 		System.out.println(Arrays.toString(suma(tabla, numAgrupar)));
