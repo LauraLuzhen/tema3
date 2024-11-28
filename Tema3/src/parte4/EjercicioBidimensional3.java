@@ -44,7 +44,7 @@ public class EjercicioBidimensional3 {
 
 		boolean simetrica = simetrica(tabla);
 		// Llamamos e imprimimos la función
-		System.out.println("¿La tabla es simétrica?" + simetrica);
+		System.out.println("¿La tabla es simétrica? " + simetrica);
 
 		// Cerramos el Scanner
 		reader.close();
@@ -97,12 +97,16 @@ public class EjercicioBidimensional3 {
 		// Declaración de variables
 		// Variable que indica si es simétrica o no
 		boolean simetrica = true;
-		
+		// Variables para recorrer la tabla
 		int i = 0;
 		int j = 0;
 		
-		while (simetrica) {
-			
+		while (simetrica && i < t.length) {
+			while (simetrica && j < t[i].length) {
+				simetrica = t[i][j] == t[j][i];
+				j++;
+			}
+			i++;
 		}
 		
 		// Devolvemos el resultado
