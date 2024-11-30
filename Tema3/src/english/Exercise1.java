@@ -1,128 +1,116 @@
 package english;
 
 import java.util.Arrays;
-// Import the Scanner
 import java.util.Scanner;
 
 public class Exercise1 {
 
 	public static void main(String[] args) {
-
-		// Variable declaration
-		// Variable that stores the letter of user
-		String letterUser = null;
-		// Variable that stores the value of user
+		
+		// Variables declaration
+		// Variable that has a value
 		int value = 0;
-		// Variable that stores the position of user
+		// Variable that indicates a position
 		int position = 0;
-		// Variable that indicates an error
+		// Variable that indicates if there are errors or not
 		boolean error = false;
-
-		// Create an array of lenght 10
+		// Variable that stores the option's user
+		String option = null;
+		
+		// Create a table with length 10
 		int table[] = new int[10];
-
+		// Create a table with "value" and "position"
+		String values[] = {"value", "position"};
+		
 		// Create the Scanner
-		Scanner reader = new Scanner(System.in);
-
-		// Create a do-while and if there isn't error, exit the loop
+		Scanner reader = new Scanner (System.in);
+		
+		// Create a do-while that exits of the loop when there are not errors
 		do {
+			// Print the menu with its options
+			System.out.println("MENU:\na) Show values\nb) Introduce a value\nc) Exit");
 			try {
-				// Ask the user for a letter
-				System.out.println("Introduce a letter: \na. Show values\nb. Introduce a value\nc. Exit");
-				letterUser = reader.next();
-				assert (letterUser.equalsIgnoreCase("a") || letterUser.equalsIgnoreCase("b")
-						|| letterUser.equalsIgnoreCase("c"));
+				option = reader.next();
+				assert (option.equalsIgnoreCase("a") || option.equalsIgnoreCase("b") || option.equalsIgnoreCase("c"));
 				error = false;
-			} catch (Exception e) {
-				// Show an error mesage
+			}  catch (Exception e) {
+				// Print a error message
 				System.err.println("Introduce a correct value");
 				error = true;
 			} catch (AssertionError e) {
-				// Show the correct values
+				// Print the range of correct values
 				System.err.println("Introduce 'a', 'b' or 'c'");
 				error = true;
 			} finally {
 				reader.nextLine();
 			}
-		} while (error == true);
-
-		// Create a while that if answer is equal to c, exit the loop
-		while (!letterUser.equalsIgnoreCase("c")) {
-			// Create a switch with letterUser
-			switch (letterUser) {
-			case "a", "A" -> {
-				// Print all the table
+		} while (error);
+		
+		// Create a while that exits of the loop when the value is c
+		while (!option.equalsIgnoreCase("c")) {
+			// Create a switch for if the option is a or b
+			switch (option) {
+			case "a", "A"->{
+				// Print all elemnts of the table
 				System.out.println(Arrays.toString(table));
 			}
-			case "b", "B" -> {
-				// Create a do-while and if there isn't an error, exit the loop
-				do {
-					try {
-						// Ask the user for a value
-						System.out.println("Introduce a value: ");
-						value = reader.nextInt();
-						error = false;
-					} catch (Exception e) {
-						// Show an error mesage
-						System.err.println("Introduce a correct value");
-						error = true;
-					} finally {
-						reader.nextLine();
-					}
-				} while (error == true);
-
-				// Create a do-while and if there isn't an error, exit the loop
-				do {
-					try {
-						// Ask the user for a position
-						System.out.println("Introduce a position: ");
-						position = reader.nextInt();
-						// Position has a range of correct values
-						assert (position >= 0 && position < 10);
-						error = false;
-					} catch (Exception e) {
-						// Show an error mesage
-						System.err.println("Introduce a correct value");
-						error = true;
-					} catch (AssertionError e) {
-						// Show the range of correct values
-						System.err.println("Introduce a value (0-9)");
-						error = true;
-					} finally {
-						reader.nextLine();
-					}
-				} while (error == true);
-
-				// Give value to the position
+			case "b", "B"->{
+				// Create a for with two iterations
+				for (int i = 0; i < values.length; i++) {
+					// Create a do-while that exits when there are not errors
+					do {
+						try {
+							// Ask to user the value and the position
+							System.out.println("Introduce a " + values[i] + ": ");
+							if (i == 0) {
+								value = reader.nextInt();
+							} else {
+								position = reader.nextInt();
+								assert (position < table.length && position >= 0);
+							}
+							error = false;
+						} catch (Exception e) {
+							// Print an error message
+							System.err.println("Introduce a correct value");
+							error = true;
+						} catch (AssertionError e) {
+							// Print the range of correct values
+							System.out.println("The position must be 0-" + table.toString());
+							error = true;
+						} finally {
+							reader.nextLine();
+						}
+					} while (error);
+				}
+				// Introduce the value in the position
 				table[position] = value;
 			}
 			}
-			// Create a do-while and if there isn't an error, exit the loop
+			
+			// Create a do-while that exits of the loop when there are not errors
 			do {
+				// Print the menu with its options
+				System.out.println("MENU:\na) Show values\nb) Introduce a value\nc) Exit");
 				try {
-					// Ask the user for a letter
-					System.out.println("Introduce a letter: \na. Show values\nb. Introduce a value\nc. Exit");
-					letterUser = reader.next();
-					assert (letterUser.equalsIgnoreCase("a") || letterUser.equalsIgnoreCase("b")
-							|| letterUser.equalsIgnoreCase("c"));
+					option = reader.next();
+					assert (option.equalsIgnoreCase("a") || option.equalsIgnoreCase("b") || option.equalsIgnoreCase("c"));
 					error = false;
-				} catch (Exception e) {
-					// Show an error mesage
+				}  catch (Exception e) {
+					// Print a error message
 					System.err.println("Introduce a correct value");
 					error = true;
 				} catch (AssertionError e) {
-					// Show the correct values
+					// Print the range of correct values
 					System.err.println("Introduce 'a', 'b' or 'c'");
 					error = true;
 				} finally {
 					reader.nextLine();
 				}
-			} while (error == true);
+			} while (error);
 		}
-
-		// Print the end of the program
+		
 		System.out.println("End of the program");
-
+		
 		// Close the Scanner
 		reader.close();
 	}
