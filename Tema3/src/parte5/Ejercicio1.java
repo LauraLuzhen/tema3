@@ -1,92 +1,89 @@
 package parte5;
 
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Ejercicio1 {
-	
-	static Scanner reader=new Scanner(System.in);
 
+	// Creamos el Scanner
+	static Scanner reader = new Scanner (System.in);
+	
 	public static void main(String[] args) {
 		
 		// Declaración de variables
-		// Variable que guarda un número random
+		// Variable que indica si hay o no un error
+		boolean error;
+		// Varibale que guarda un número random
 		int numRandom;
-		// Variable que guarda un valor
+		// Variable que guarda el valor que el usuairo quiere saber
 		int valor = 0;
-		// Variable que indica si hay o no error
-		boolean error = false;
 		
-		// Creamos una tabla bidimensional que guarde la longitud de la tabla
-		int[] dimensiones = longitud();
-		// Creamos una tabla bidimensional
+		// Creamos una tabla que guarde las dimensiones de la tabla
+		int dimensiones[] = longitud();
+		// Creamos una tabla con las dimensiones dadas
 		int tabla[][] = new int[dimensiones[0]][dimensiones[1]];
 		
 		// Creamos el Random
 		Random rand = new Random();
-		// Creamos el Scanner
 		
-		// Creamos dos for que recorra las filas y columnas de la tabla
+		// Creamos dos for que rellene la tabla entera
 		for (int i = 0; i < tabla.length; i++) {
 			for (int j = 0; j < tabla[i].length; j++) {
-				// Generamos un número random y lo añadimos a la tabla
-				numRandom = rand.nextInt(0, 1000);
+				// Generamos un número random y lo guardamos en la tabla
+				numRandom = rand.nextInt(0, 10);
 				tabla[i][j] = numRandom;
 			}
 		}
 		
-		// Creamos un do-while que se salga del bucle cuando no haya errores
+		// Creamos un do-while que le pregunte al usuario por el valor que quiere saber
 		do {
 			try {
-				// Le pedimos al usuario un valor
-				System.out.println("¿Qué valor crees que está en la tabla? (0-1000): ");
+				// Le pedimos el valor al usuario
+				System.out.println("Introduce un valor: ");
 				valor = reader.nextInt();
-				assert (valor > 0 && valor < 1001);
+				assert (valor >= 0 && valor < 101);
 				error = false;
-			} catch (InputMismatchException e) {
-				// Imprimimos un mensaje de erro
+			} catch (Exception e) {
+				// Imprimimos un mensaje de error
 				System.err.println("Introduce un valor válido");
 				error = true;
 			} catch (AssertionError e) {
-				// Imprimimos el rango de valores válidos
-				System.err.println("El valor debe estar entre 0 y 1000");
+				// Imprimimos el rango válido de valores
+				System.err.println("El valor está entre 0-100");
 				error = true;
 			} finally {
 				reader.nextLine();
 			}
-		} while (error == true);
+		} while (error);
 		
-		// Imprimimos y llamamos a la función presente
-		System.out.println(presente(tabla, valor));
+		// Imprimimos y llamamos a la función
+		System.out.println("¿El valor " + valor + " está en la tabla? " + esta(tabla, valor));
 		
 		// Cerramos el Scanner
 		reader.close();
 	}
 	
+	// Función que le pide al usuario la longitud de la tabla
 	static int[] longitud() {
 		
-		// Declaración de variables
-		// Variable que indica si hay o no error
-		boolean error = false;
+		// Declaración de varibales
+		// Variable que indica si hay o no  un error
+		boolean error;
 		
-		// Creamos una tabla bidimensional
-		int[] tabla = new int[2];
+		// Creamos una tabla de longitud 2
+		int t[] = new int [2];
+		// Creamos una tabla que dice lo que hay en cada posicion de t[]
+		String valores[] = {"filas", "columnas"};
 		
-		
-		for (int i=0; i<2; i++) {
+		// Creamos un for que le pregunten al usuario por las filas y columnas
+		for (int i = 0; i < t.length; i++) {
 			// Creamos un do-while que salga del bucle cuando no haya errores
 			do {
 				try {
 					// Le pedimos la longitud al usuario
-					System.out.println("Introduce la longitud de la tabla: ");
-					if (i==0) {
-						tabla[0] = reader.nextInt();
-						assert (tabla[0] > 0);
-					} else {
-						tabla[1] = reader.nextInt();
-						assert (tabla[1] > 0);
-					}
+					System.out.println("Introduce el número de " + valores[i] + ": ");
+					t[i] = reader.nextInt();
+					assert (t[i] > 0);
 					error = false;
 				} catch (Exception e) {
 					// Imprimimos un mensaje de error
@@ -94,35 +91,38 @@ public class Ejercicio1 {
 					error = true;
 				} catch (AssertionError e) {
 					// Imprimimos el rango de valores válidos
-					System.err.println("La longitud deben ser mayor que 0");
+					System.err.println("El número de " + valores[i] + " debe ser mayor que 0");
 					error = true;
 				} finally {
 					reader.nextLine();
 				}
-			} while (error == true);
+			} while (error);
 		}
-		
-		
-		// Devolvemos la tabla
-		return tabla;
+		// Devolvemos la tabla con las longitudes
+		return t;
 	}
 	
-	static boolean presente(int t[][], int valor) {
+	// Función que indica si el elemnto se encuentra en la tabla o no
+	static boolean esta(int t[][], int valor) {
 		
 		// Declaración de variables
-		// Variable que indica si está o no en la tabla
-		boolean enc = false;
+		// Variable que indica si está o no el valor en la tabla
+		boolean esta = false;
+		int i = 0;
+		int j = 0;
 		
-		// Creamos un while que dentro tenga dos for-while y recorra cada elemento de la tabla y lo compare con el valor
-		while (!enc) {
-			for (int fila[]: t) {
-				for (int elemento: fila) {
-					enc = elemento == valor;
-				}
+		// Creamos dos while que recorran la tabla uno las filas y el otro las columnas
+		// Sale del bucle cuando no haya más elementos o cuando se haya encontrado el valor
+		while (!esta && i < t.length) {
+			while (!esta && j < t[i].length) {
+				// Comparamos valores
+				esta = t[i][j] == valor;
+				j++;
 			}
+			i++;
 		}
 		
-		// Devolvemos si el valor se encuentra o no en la tabla
-		return enc;
+		// Devolvemos el valor
+		return esta;
 	}
 }
