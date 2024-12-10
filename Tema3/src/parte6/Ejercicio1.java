@@ -120,20 +120,17 @@ public class Ejercicio1 {
 	static boolean filas (char t[][]) {
 		
 		// Declaración de variables
-		boolean ganar = true;
+		boolean ganar = false;
 		boolean vacio = false;
 		int i = 0;
-		int j;
 		
-		while (i < t.length && ganar) {
-			j = 0;
-			while (!vacio && j < t[i].length && ganar) {
-				vacio = t[i][j] == '-';
-				ganar = t[i][0] == t[i][j];
-				j++;
+		while (!ganar && i < t.length) {
+			vacio = t[i][0] == '-';
+			if (!vacio) {
+				ganar = t[i][0] == t[i][1] && t[i][0] == t[i][2];
+			} else {
+				ganar = false;
 			}
-			
-			vacio = false;
 			i++;
 		}
 		
@@ -145,23 +142,20 @@ public class Ejercicio1 {
 	static boolean columnas (char t[][]) {
 		
 		// Declaración de variables
-		boolean ganar = true;
+		boolean ganar = false;
 		boolean vacio = false;
 		int j = 0;
-		int i;
-				
-		while (j < t[0].length && ganar) {
-			i = 0;
-			while (!vacio && i < t.length && ganar) {
-				vacio = t[i][j] == '-';
-				ganar = t[0][j] == t[i][j];
-				i++;
+		
+		while (!ganar && j < 3) {
+			vacio = t[0][j] == '-';
+			if (!vacio) {
+				ganar = t[0][j] == t[1][j] && t[0][j] == t[2][j];
+			} else {
+				ganar = false;
 			}
-				
-			vacio = false;
 			j++;
 		}
-				
+		
 		// Devolvemos la variable
 		return ganar;
 	}
@@ -171,10 +165,17 @@ public class Ejercicio1 {
 		
 		// Declaración de variables
 		// Variable que indica si ha ganado algún jugador
-		boolean ganar;
+		boolean ganar = true;
+		boolean vacio = t[1][1] == '-';
 		
-		if (((t[0][0] == t[1][1] && t[1][1] == t[2][2]) || (t[0][2] == t[1][1] && t[1][1] == t[2][0])) && (t[1][1] != '-')) {
-			ganar = true;
+		if (!vacio) {
+			if (t[1][1] == t[0][0] && t[1][1] == t[2][2]) {
+				ganar = true;
+			} else if (t[1][1] == t[0][2] && t[1][1] == t[2][0]) {
+				ganar = true;
+			} else {
+				ganar = false;
+			}
 		} else {
 			ganar = false;
 		}
