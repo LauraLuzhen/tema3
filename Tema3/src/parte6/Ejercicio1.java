@@ -127,7 +127,10 @@ public class Ejercicio1 {
 		while (!ganar && i < t.length) {
 			vacio = t[i][0] == '-';
 			if (!vacio) {
-				ganar = t[i][0] == t[i][1] && t[i][0] == t[i][2];
+				ganar = true;
+				for (int j = 1; j < t[i].length; j++) {
+					ganar = ganar && (t[i][0] == t[i][j]);
+				}
 			} else {
 				ganar = false;
 			}
@@ -149,7 +152,10 @@ public class Ejercicio1 {
 		while (!ganar && j < 3) {
 			vacio = t[0][j] == '-';
 			if (!vacio) {
-				ganar = t[0][j] == t[1][j] && t[0][j] == t[2][j];
+				ganar = true;
+				for (int i = 1; i < t.length; i++) {
+					ganar = ganar && (t[0][j] == t[i][j]); 
+				}
 			} else {
 				ganar = false;
 			}
@@ -164,22 +170,35 @@ public class Ejercicio1 {
 	static boolean diagonales (char t[][]) {
 		
 		// Declaración de variables
-		// Variable que indica si ha ganado algún jugador
-		boolean ganar = true;
-		boolean vacio = t[1][1] == '-';
-		
-		if (!vacio) {
-			if (t[1][1] == t[0][0] && t[1][1] == t[2][2]) {
-				ganar = true;
-			} else if (t[1][1] == t[0][2] && t[1][1] == t[2][0]) {
-				ganar = true;
-			} else {
-				ganar = false;
+		boolean ganar1 = true;
+		boolean ganar2 = true;
+		boolean vacio1 = t[0][0] == '-';
+		boolean vacio2 = t[t.length - 1][0] == '-';
+		int i = 1;
+		int k = 0, j = t.length - 1;
+		boolean ganar;
+
+		if (!vacio1) {
+			while (ganar1 && i < t.length) {
+				ganar1 = ganar1 && (t[0][0] == t[i][i]);
+				i++;
 			}
 		} else {
-			ganar = false;
+			ganar1 = false;
 		}
-		
+
+		if (!vacio2) {
+			while (ganar2 && k < t.length) {
+				ganar2 = ganar2 && (t[j][k] == t[t.length - 1][0]);
+				k++;
+				j--;
+			}
+		} else {
+			ganar2 = false;
+		}
+
+		ganar = ganar1 || ganar2;
+
 		// Devolvemos la variable
 		return ganar;
 	}
