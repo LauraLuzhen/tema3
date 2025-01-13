@@ -48,7 +48,7 @@ public class Ejercicio16 {
 			System.out.println("Anagrama generado: " + anagrama);
 
 			// Imprimimos las letras que coinciden
-			System.out.println(letrasAcertadas(respuesta, fraseOriginal));
+			System.out.println("Letras acertadas: " + letrasAcertadas(respuesta, fraseOriginal));
 
 			// Le pedimos la frase al usuario para que la acierte
 			System.out.println("Introduce la frase original: ");
@@ -93,7 +93,7 @@ public class Ejercicio16 {
 		String aciertos = "";
 
 		// Creamos un for que recorra la frase caracter a caracter
-		for (int i = 0; i < respuesta.length(); i++) {
+		for (int i = 0; i < frase.length(); i++) {
 			// Creamos un if-else que si conincide la respuesta con la frase la guardamos
 			if (respuesta.charAt(i) == frase.charAt(i)) {
 				aciertos += frase.charAt(i);
