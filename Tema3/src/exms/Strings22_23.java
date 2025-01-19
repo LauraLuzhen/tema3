@@ -5,130 +5,120 @@ import java.util.Scanner;
 
 public class Strings22_23 {
 
-	// Creamos el Scanner
-	static Scanner reader = new Scanner(System.in);
-
-	// Variable estática que va a guardar en una cadena las letras que no se
-	// encuentran en la palabra dichas por el usuario
-	static String noAcertadas;
-
-	// Lista de posibles palabras a adivinar
-	static String[] palabras = { "humanidad", "persona", "hombre", "mujer", "individuo", "cuerpo", "pierna", "cabeza",
-			"brazo", "familia" };
-
-	// Variable que guarda la palabra secreta
-	static String palabraSecreta;
-
-	// Variable que guarda la pista que va a imprimir al usuario
-	static String palabraPista;
-
-	// Constante de máximo de 7 intentos
+	static Scanner src = new Scanner (System.in);
+	
+	static Random rand = new Random();
+	
+	static String[] palabras = {"humanidad", "persona", "hombre", "mujer", "individuo", "cuerpo", "pierna", "cabeza", "brazo", "familia"};
+	
 	static final int NUMINTENTOS = 7;
-
+	
+	static String palabraSecreta;
+	
+	static String palabraPista = "";
+	
+	static String noAcertadas = "";
+	
 	public static void main(String[] args) {
-
+		
+		int intentos = 0;
+		int eleccion;
+		char letra;
+		String palabra;
+		
 		generarPalabra();
-
-	}
-
-	// Función que genera una palabra aleatoria de la lista y la guarda en la var.
-	// palabraSecreta
-	static void generarPalabra() {
-
-		int pos;
-
-		Random rand = new Random();
-
-		pos = rand.nextInt(0, palabras.length);
-
-		palabraSecreta = palabras[pos];
-	}
-
-	//
-	static int menu() {
-
-		// Declaración de variables
-		// Variable que guarda la opción que seleciona el usuario
-		int opcionSeleccionada = 0;
-		// Variable que indica si se produce un error
-		boolean error;
-
-		// Do-while que sale del bucle cuando no haya errores
+		
+		for (int i = 0; i < palabraSecreta.length(); i++) {
+			palabraPista += '_';
+		}
+		
+		System.out.println(palabraPista);
+		
+		palabraPista = "";
+		
 		do {
-			try {
-				// Le pedimos una acción al usuario
-				System.out.println(
-						"Seleccione una de las siguientes opciones: \n\t1. Introducir letra\n\t2. Introducir palabra");
-				opcionSeleccionada = reader.nextInt();
-				error = false;
-				assert (opcionSeleccionada == 1 || opcionSeleccionada == 2);
-			} catch (Exception e) {
-				System.err.println("Introduce un valor válido");
-				error = true;
-			} catch (AssertionError e) {
-				System.err.println("Introduce 1 o 2");
-				error = true;
+			
+			do {
+				eleccion = menu();
+			} while (eleccion != 1 && eleccion != 2);
+			
+			if (eleccion == 1) {
+				System.out.println("Introduce una letra: ");
+				letra = src.next().charAt(0);
+				
+				compruebaLetra(letra);
+			} else {
+				System.out.println("Introduce la palabra a acertar: ");
+				palabra = src.next();
+				src.nextLine();
+				
+				compruebaPalabra(palabra);
 			}
-		} while (error);
-
-		// Devolvemos la elección del usuario
-		return opcionSeleccionada;
+			
+			pintaPista();
+			
+			System.out.println("Número de intentos restantes " + intentos + "/7");
+		} while (!palabraPista.equals(palabraSecreta) && intentos < NUMINTENTOS);
+		
+		if (intentos == NUMINTENTOS) {
+			System.out.println("GAME OVER");
+		} else {
+			System.out.println("¡¡ENHORABUENA!! HAS ACERTADO");
+		}
+		
+		src.close();
 	}
-
-	// Función que comprueba si una letra está o no en la palabra secreta, en caso
-	// contrario se añade a noAcertadas
-	static void compruebaLetra(char letra) {
-
-		// Declaración de variables
-		// Variable que guarda la letra en minúsculas
-		char letraMin = Character.toLowerCase(letra);
-		// Variable que indica si está la letra en la palabra secreta o no
-		int esta = palabraSecreta.indexOf(letraMin);
-
-		// If-else si la letra está da un nº positivo y añadimos la letra en la palabra
-		// pista
-		if (esta >= 0) {
-			// For que recorre cada letra de la palabra secreta
+	
+	static void generarPalabra () {
+		
+		int numAleatorio = rand.nextInt(0, palabras.length);
+		
+		palabraSecreta = palabras[numAleatorio];
+	}
+	
+	static int menu () {
+		
+		int respuesta;
+		
+		System.out.println("Seleccione una de las siguientes opciones: \n  1. Introducir letra.\n  2. Introducir palabra.");
+		respuesta = src.nextInt();
+		
+		return respuesta;
+	}
+	
+	static void compruebaLetra (char letra) {
+		
+		char letraCorregida = Character.toLowerCase(letra);
+		String letraCadena = String.valueOf(letraCorregida);
+		
+		if (palabraSecreta.contains(letraCadena)) {
 			for (int i = 0; i < palabraSecreta.length(); i++) {
-				// If-else si coincide la letra se le añade a la palabra pista
-				if (palabraSecreta.charAt(i) == letraMin) {
-					palabraPista += letraMin;
+				if (palabraSecreta.charAt(i) == letraCorregida) {
+					palabraPista += letraCorregida;
 				} else {
-					// En caso contrario se añade un _
-					palabraPista += "_";
+					palabraPista += '_';
 				}
 			}
 		} else {
-			// En caso de dar un nº negativo se añade la letra en noAcertadas
-			noAcertadas += letra;
+			noAcertadas += letraCorregida;
 		}
 	}
-
-	// Función que comprueba si la cadena es igual a la palabra secreta
-	static void compruebaPalabra(String cad) {
-
-		// Declaración de variables
-		// Variable que guarda la cadena en minúsculas
-		String cadMin = cad.toLowerCase();
-
-		// If que compara la cadena con la palabra secreta si son iguales añade la
-		// cadena a la palabra pista
-		if (cadMin.equals(palabraSecreta)) {
-			palabraPista += cadMin;
+	
+	static void compruebaPalabra (String palabra) {
+		
+		String palabraCorregida = palabra.toLowerCase();
+		
+		if (palabraSecreta.equals(palabraCorregida)) {
+			palabraPista = palabraCorregida;
 		}
 	}
-
-	// Función que imprime por consola las letras no acertadas del usuario y las
-	// pistas
-	static void pintaPista() {
-
-		// Tabla de caracteres que son las letras no acertadas
-		char[] letrasNoAcertadas = noAcertadas.toCharArray();
-
-		// Imprimimos las letras no acertadas
-		System.out.println("Letras no acertadas: " + letrasNoAcertadas.toString());
-
-		// Imprimimos la pista
+	
+	static void pintaPista () {
+		
+		char[] letras = noAcertadas.toCharArray();
+		
+		System.out.println("Letras no acertadas: " + letras.toString());
+		
 		System.out.println(palabraPista);
 	}
 }
