@@ -25,6 +25,7 @@ public class Strings22_23 {
 		int eleccion;
 		char letra;
 		String palabra;
+		String letraCorregida;
 		
 		generarPalabra();
 		
@@ -34,8 +35,6 @@ public class Strings22_23 {
 		
 		System.out.println(palabraPista);
 		
-		palabraPista = "";
-		
 		do {
 			
 			do {
@@ -43,10 +42,16 @@ public class Strings22_23 {
 			} while (eleccion != 1 && eleccion != 2);
 			
 			if (eleccion == 1) {
-				System.out.println("Introduce una letra: ");
-				letra = src.next().charAt(0);
+				
+				do {
+					System.out.println("Introduce una letra: ");
+					letra = src.next().charAt(0);
+					letraCorregida = String.valueOf(letra).toLowerCase();
+				} while (palabraPista.contains(letraCorregida));
 				
 				compruebaLetra(letra);
+				intentos++;
+				
 			} else {
 				System.out.println("Introduce la palabra a acertar: ");
 				palabra = src.next();
@@ -94,14 +99,13 @@ public class Strings22_23 {
 		if (palabraSecreta.contains(letraCadena)) {
 			for (int i = 0; i < palabraSecreta.length(); i++) {
 				if (palabraSecreta.charAt(i) == letraCorregida) {
-					palabraPista += letraCorregida;
-				} else {
-					palabraPista += '_';
+					palabraPista = palabraPista.substring(0, i) + letraCorregida + palabraPista.substring(i+1);
 				}
 			}
 		} else {
-			noAcertadas += letraCorregida;
+			noAcertadas += letraCorregida + "  ";
 		}
+		
 	}
 	
 	static void compruebaPalabra (String palabra) {
@@ -115,9 +119,7 @@ public class Strings22_23 {
 	
 	static void pintaPista () {
 		
-		char[] letras = noAcertadas.toCharArray();
-		
-		System.out.println("Letras no acertadas: " + letras.toString());
+		System.out.println("Letras no acertadas: " + noAcertadas);
 		
 		System.out.println(palabraPista);
 	}
