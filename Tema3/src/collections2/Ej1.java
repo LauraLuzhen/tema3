@@ -8,12 +8,14 @@ public class Ej1 {
 
 	public static void main(String[] args) {
 		
-		// Lectura y modificación de elementos
-		List<Integer> lista1 = new ArrayList<>();
+		List<Integer> lista1 = new ArrayList<>(); 	//Modificación y lectura
+		List<Integer> lista2 = new LinkedList<>(); 	//Insercción y eliminación de objetos
 		
-		// Insercción y eliminación de elementos
-		List<Integer> lista2 = new LinkedList<>();
 		
-		lista1.getValue()
+		lista1.add(1);	//Añade un nuevo objeto al final de la lista 
+						//Devuelve true
+		
+		System.out.println(lista1);
+		System.out.println(lista2);
 	}
 }
