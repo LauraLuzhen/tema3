@@ -16,6 +16,5 @@ public class Ej1 {
 						//Devuelve true
 		
 		System.out.println(lista1);
-		System.out.println(lista2);
 	}
 }
