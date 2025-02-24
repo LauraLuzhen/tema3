@@ -1,6 +1,7 @@
 package collections;
 
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Ej6 {
@@ -9,27 +10,38 @@ public class Ej6 {
 		/*
 		 * Repite la actividad anterior de forma que se inserten los nombres manteniendo
 		 * el orden alfabético.
-		 * 
 		 */
-		
-		String nombre;
-		
-		Scanner reader = new Scanner (System.in);
-		
-		TreeSet<String> palabras = new TreeSet<>();
-		
-		System.out.println("Introduce un nombre: ");
-		nombre = reader.nextLine().toLowerCase();
-		
-		while (!nombre.equals("fin")) {
-			palabras.add(nombre);
-			
-			System.out.println("Introduce un nombre: ");
-			nombre = reader.nextLine().toLowerCase();
+
+		// Declaración de variables
+		// Variable que guarda la palabra del usuario
+		String palabra;
+
+		// Creamos la colección
+		Set<String> lista = new TreeSet<String>();
+
+		// Creamos el Scanner
+		Scanner reader = new Scanner(System.in);
+
+		// Le pedimos al usuario que introduzca una palabra
+		System.out.println("Introduce una palabra: ");
+		palabra = reader.nextLine();
+
+		// While que se sale del bucle cuando el usuario escribe fin
+		while (!palabra.equalsIgnoreCase("fin")) {
+
+			// Guardamos la palabra
+			lista.add(palabra);
+
+			// Le preguntamos al usuario
+			System.out.println("Introduce una palabra: ");
+			palabra = reader.nextLine();
 		}
-		
-		System.out.println(palabras);
-		
+
+		// Imprimimos la lista
+		System.out.println(lista);
+
+		// Cerramos el Scanner
 		reader.close();
+
 	}
 }

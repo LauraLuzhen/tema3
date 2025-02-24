@@ -1,32 +1,36 @@
 package collections;
 
+import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Ej4 {
 
 	public static void main(String[] args) {
-		/*
-		 * Implementa una aplicación donde se insertan 20 números enteros aleatorios
-		 * distintos, menores que 100, en una colección. Hay que asegurarse de que se
-		 * guardan 20. Deben guardarse ordenados a medida que se vayan generando, y se
-		 * mostrará la colección resultante por pantalla.
-		 */
 		
-		int numRandom;
-		final int CANTIDAD = 20;
+		// Declaración de variables
+		// Variable que guarda un número aleatorio
+		int num;
 		
-		Random rand = new Random();
+		// Constante que determina la cantidad de números a generar
+		final int GENERAR = 20;
 		
-		Set<Integer> numeros = new TreeSet<>();
+		// Creamos una colección
+		Set<Integer> lista = new LinkedHashSet<Integer>();
 		
-		while (numeros.size() < CANTIDAD) {
-			numRandom = rand.nextInt(0, 100);
+		// Creamos el Random 
+		Random rand = new Random ();
+		
+		// Do-while que se saldrá del bucle cuando llegue a la longitud
+		do {
+			// Generamos un número aleatorio
+			num = rand.nextInt(0, 100);
 			
-			numeros.add(numRandom);
-		}
+			// Lo guardamos en la lista
+			lista.add(num);
+		} while (lista.size() < GENERAR);
 		
-		System.out.println(numeros);
+		// Imprimimos la lista
+		System.out.println(lista);
 	}
 }

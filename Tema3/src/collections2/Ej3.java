@@ -8,43 +8,47 @@ public class Ej3 {
 
 	public static void main(String[] args) {
 
-		/*
-		 * Implementa una aplicación que cuente la frecuencia de aparición de cada letra
-		 * (solo los caracteres alfabéticos) en la siguiente cadena de texto y luego
-		 * muestre el conteo por pantalla. Usa la implementación más apropiada:
-		 * 
-		 * "En un agujero en el suelo, vivia un hobbit. No un agujero humedo, sucio,
-		 * repugnante, con restos de gusanos y olor a fango, ni tampoco un agujero,
-		 * seco, desnudo y arenoso, sin nada en que sentarse o que comer: era un
-		 * agujero-hobbit, y eso significa comodidad" . Pista: se puede utilizar el
-		 * método estático isLetter de la clase Character.
-		 * 
-		 */
-		
 		// Declaración de variables
-		// Variable que guarda la frase
+		// Variable que guarda la frase del usuario
 		String frase;
 		// Variable que guarda la longitud de la frase
 		int longitud;
-		
+		// Variable que guarda una letra
 		char letra;
-		
-		// Creamos la colección TreeMap
-		Map<Character, Integer> letras = new TreeMap<>();
-		
+
+		// Creamos el mapa
+		Map<Character, Integer> lista = new TreeMap<Character, Integer>();
+
 		// Creamos el Scanner
 		Scanner reader = new Scanner(System.in);
-		
-		// Le pedimos una frase al usuario y guardamos la frase en la variable
+
+		// Le pedimos una frase
 		System.out.println("Introduce una frase: ");
-		frase = reader.nextLine();
-		
-		// Guardamos la longitud de la frase
+		frase = reader.nextLine().toLowerCase();
+
+		// Guardamos la longitud
 		longitud = frase.length();
-		
+
+		// For que recorre cada letra de la frase
 		for (int i = 0; i < longitud; i++) {
+			// Guardamos la letra
 			letra = frase.charAt(i);
-			
+			// If que si es una letra va a aumentar su contador
+			if (Character.isLetter(letra)) {
+				if (lista.containsKey(letra)) {
+					lista.put(letra, lista.get(letra) + 1);
+				} else {
+					lista.put(letra, 1);
+				}
+			}
 		}
+
+		// For-each que imprime cada clave-valor del mapa
+		for (Map.Entry<Character, Integer> filaLetra : lista.entrySet()) {
+			System.out.println(filaLetra.getKey() + " = " + filaLetra.getValue());
+		}
+
+		// Cerramos el Scanner
+		reader.close();
 	}
 }
